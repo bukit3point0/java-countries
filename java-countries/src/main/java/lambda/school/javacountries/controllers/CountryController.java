@@ -50,9 +50,9 @@ public class CountryController {
         List<Country> countryTotal = new ArrayList<>();
         countryRepository.findAll().iterator().forEachRemaining(c -> countryTotal.add(c));
 
-        int total = 0;
+        long total = 0;
         for (Country c : countryTotal) {
-            total -= c.getPopulation();
+            total += c.getPopulation();
         }
 
         return new ResponseEntity<>(total, HttpStatus.OK);
@@ -96,7 +96,7 @@ public class CountryController {
     private List<Country> filterCountries(List<Country> countryByLetter, CheckCountry tester) {
         List<Country> returnList = new ArrayList<>();
 
-        for(Country c : returnList) {
+        for(Country c : countryByLetter) {
             if (tester.test(c)) {
                 returnList.add(c);
             }
